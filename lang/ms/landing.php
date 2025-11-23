@@ -53,7 +53,7 @@ return [
     'pricing_per_month' => '/bulan',
     'pricing_for_starter' => 'Untuk permulaan',
     'pricing_for_small' => 'Untuk perniagaan kecil',
-    'pricing_for_medium' => 'Untuk perniagaan sederhana',
+    'pricing_for_medium' => 'Untuk SME',
     'pricing_for_large' => 'Untuk perniagaan besar',
     'pricing_popular' => 'POPULAR',
     'pricing_start_free' => 'Mulakan Percuma',

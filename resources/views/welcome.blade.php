@@ -272,13 +272,72 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-20 bg-gradient-to-br from-gray-50 to-secondary-50">
+    <section id="pricing" class="py-20 bg-gradient-to-br from-gray-50 to-secondary-50" x-data="{
+        currency: 'RM',
+        rates: {
+            'RM': 1,
+            'USD': 0.22,
+            'RP': 3500,
+            'SGD': 0.30
+        },
+        symbols: {
+            'RM': 'RM',
+            'USD': '$',
+            'RP': 'Rp',
+            'SGD': 'S$'
+        },
+        convert(amount) {
+            return Math.round(amount * this.rates[this.currency]);
+        },
+        format(amount) {
+            const converted = this.convert(amount);
+            if (this.currency === 'RP') {
+                // Format RP dynamically: M for millions, K for thousands
+                if (converted >= 1000000) {
+                    const inMillions = (converted / 1000000).toFixed(1).replace('.0', '');
+                    return this.symbols[this.currency] + inMillions + 'M';
+                } else if (converted >= 1000) {
+                    const inThousands = Math.round(converted / 1000);
+                    return this.symbols[this.currency] + inThousands + 'K';
+                } else {
+                    return this.symbols[this.currency] + converted;
+                }
+            }
+            return this.symbols[this.currency] + converted.toLocaleString();
+        }
+    }">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{{ __('landing.pricing_title') }}</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                     {{ __('landing.pricing_subtitle') }}
                 </p>
+                
+                <!-- Currency Switcher -->
+                <div class="mt-8 flex justify-center">
+                    <div class="inline-flex rounded-lg border border-gray-300 bg-white p-1 shadow-sm">
+                        <button @click="currency = 'RM'" 
+                                :class="currency === 'RM' ? 'bg-primary-900 text-white' : 'text-gray-700 hover:bg-gray-100'"
+                                class="px-4 py-2 rounded-md font-medium transition">
+                            RM
+                        </button>
+                        <button @click="currency = 'USD'" 
+                                :class="currency === 'USD' ? 'bg-primary-900 text-white' : 'text-gray-700 hover:bg-gray-100'"
+                                class="px-4 py-2 rounded-md font-medium transition">
+                            USD
+                        </button>
+                        <button @click="currency = 'RP'" 
+                                :class="currency === 'RP' ? 'bg-primary-900 text-white' : 'text-gray-700 hover:bg-gray-100'"
+                                class="px-4 py-2 rounded-md font-medium transition">
+                            RP
+                        </button>
+                        <button @click="currency = 'SGD'" 
+                                :class="currency === 'SGD' ? 'bg-primary-900 text-white' : 'text-gray-700 hover:bg-gray-100'"
+                                class="px-4 py-2 rounded-md font-medium transition">
+                            SGD
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div class="grid md:grid-cols-4 gap-8 max-w-7xl mx-auto">
@@ -286,11 +345,12 @@
                 <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">Percuma</h3>
                     <p class="text-gray-600 mb-6">{{ __('landing.pricing_for_starter') }}</p>
-                    <div class="mb-6">
-                        <span class="text-5xl font-bold text-primary-900">RM0</span>
+                    <div class="mb-6 h-24 flex flex-col justify-center">
+                        <span class="text-5xl font-bold text-primary-900" x-text="format(0)"></span>
                         <span class="text-gray-600">{{ __('landing.pricing_per_month') }}</span>
                     </div>
-                    <ul class="space-y-4 mb-8">
+                    <hr class="border-gray-200 mb-6">
+                    <ul class="space-y-4 mb-8 min-h-[180px]">
                         <li class="flex items-start space-x-3">
                             <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor"
                                 viewBox="0 0 20 20">
@@ -321,7 +381,7 @@
                     </ul>
                     <a href="/register"
                         class="block w-full text-center bg-gray-100 text-gray-900 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
-                        Mulakan Percuma
+                        {{ __('landing.pricing_start_free') }}
                     </a>
                 </div>
 
@@ -329,11 +389,12 @@
                 <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">Basic</h3>
                     <p class="text-gray-600 mb-6">{{ __('landing.pricing_for_small') }}</p>
-                    <div class="mb-6">
-                        <span class="text-5xl font-bold text-primary-900">RM60</span>
+                    <div class="mb-6 h-24 flex flex-col justify-center">
+                        <span class="text-5xl font-bold text-primary-900" x-text="format(60)"></span>
                         <span class="text-gray-600">{{ __('landing.pricing_per_month') }}</span>
                     </div>
-                    <ul class="space-y-4 mb-8">
+                    <hr class="border-gray-200 mb-6">
+                    <ul class="space-y-4 mb-8 min-h-[180px]">
                         <li class="flex items-start space-x-3">
                             <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor"
                                 viewBox="0 0 20 20">
@@ -368,7 +429,7 @@
                     </a>
                 </div>
 
-                <!-- Pro Plan ({{ __('landing.pricing_popular') }}) -->
+                <!-- Pro Plan (POPULAR) -->
                 <div class="bg-gradient-primary rounded-2xl p-8 shadow-2xl transform md:scale-105 relative">
                     <div
                         class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-secondary-400 text-white px-4 py-1 rounded-full text-sm font-semibold">
@@ -376,11 +437,12 @@
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-2">Pro</h3>
                     <p class="text-secondary-100 mb-6">{{ __('landing.pricing_for_medium') }}</p>
-                    <div class="mb-6">
-                        <span class="text-5xl font-bold text-white">RM300</span>
+                    <div class="mb-6 h-24 flex flex-col justify-center">
+                        <span class="text-5xl font-bold text-white" x-text="format(300)"></span>
                         <span class="text-secondary-100">{{ __('landing.pricing_per_month') }}</span>
                     </div>
-                    <ul class="space-y-4 mb-8">
+                    <hr class="border-secondary-300 mb-6">
+                    <ul class="space-y-4 mb-8 min-h-[180px]">
                         <li class="flex items-start space-x-3">
                             <svg class="w-5 h-5 text-secondary-300 flex-shrink-0 mt-0.5" fill="currentColor"
                                 viewBox="0 0 20 20">
@@ -428,11 +490,12 @@
                 <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">Max</h3>
                     <p class="text-gray-600 mb-6">{{ __('landing.pricing_for_large') }}</p>
-                    <div class="mb-6">
-                        <span class="text-5xl font-bold text-primary-900">RM4000</span>
+                    <div class="mb-6 h-24 flex flex-col justify-center">
+                        <span class="text-5xl font-bold text-primary-900" x-text="format(4000)"></span>
                         <span class="text-gray-600">{{ __('landing.pricing_per_month') }}</span>
                     </div>
-                    <ul class="space-y-4 mb-8">
+                    <hr class="border-gray-200 mb-6">
+                    <ul class="space-y-4 mb-8 min-h-[180px]">
                         <li class="flex items-start space-x-3">
                             <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor"
                                 viewBox="0 0 20 20">
