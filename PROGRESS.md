@@ -34,15 +34,31 @@
 - **Translated Buttons:** All CTA buttons translate properly
 - **Optimized Text:** Shortened descriptions (e.g., "Untuk SME" in Malay)
 
+### 5. Interactive & Visual Enhancements (100% Complete)
+- **Hover Effects:**
+  - **Dashboard:** 3-degree tilt + zoom on hover
+  - **Testimonials:** Alternating tilt (left/right) + zoom on hover
+  - **Pricing Cards:** Zoom effect on all cards, extra zoom for Pro plan
+- **Client Carousel:**
+  - Auto-playing infinite scroll animation
+  - 6 brand logos (Shopee, Lazada, Grab, etc.)
+  - Grayscale to color transition on hover
+  - Pause on hover functionality
+- **Premium Styling:**
+  - Gold border and crown icon for Max plan
+  - Thumbs-up icon for Pro plan
+  - Enhanced shadow effects
+
 ## 📊 Current Statistics
 
 - **Files Created:** 20+
-- **Translation Keys:** 100+
+- **Translation Keys:** 110+
 - **Languages:** 4 (EN, MS, ID, ZH)
 - **Currencies:** 4 (RM, USD, RP, SGD)
 - **Pricing Plans:** 4 (Free, Basic, Pro, Max)
 - **Feature Cards:** 6
-- **Lines of Code Added:** 3,287+
+- **Client Logos:** 6
+- **Lines of Code Added:** 3,400+
 
 ## 🎯 Next Steps
 

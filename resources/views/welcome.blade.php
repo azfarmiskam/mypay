@@ -145,7 +145,7 @@
                     </div>
                 </div>
                 <div class="relative">
-                    <div class="bg-white rounded-2xl shadow-2xl p-4">
+                    <div class="bg-white rounded-2xl shadow-2xl p-4 transition-all duration-300 hover:rotate-3 hover:scale-105">
                         <img src="/images/dashboard-preview.png"
                             alt="Dashboard Preview" class="rounded-lg w-full">
                     </div>
@@ -561,7 +561,7 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-gray-50 rounded-2xl p-8">
+                <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:scale-105 hover:rotate-2 hover:shadow-xl">
                     <div class="flex items-center mb-4">
                         <div class="flex text-yellow-400">
                             ★★★★★
@@ -582,7 +582,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-50 rounded-2xl p-8">
+                <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:scale-105 hover:-rotate-2 hover:shadow-xl">
                     <div class="flex items-center mb-4">
                         <div class="flex text-yellow-400">
                             ★★★★★
@@ -603,7 +603,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-50 rounded-2xl p-8">
+                <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:scale-105 hover:rotate-2 hover:shadow-xl">
                     <div class="flex items-center mb-4">
                         <div class="flex text-yellow-400">
                             ★★★★★
@@ -710,6 +710,7 @@
 </body>
 
 </html>
+
 
 
 
