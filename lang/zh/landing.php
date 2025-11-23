@@ -73,11 +73,11 @@ return [
     'testimonials_subtitle' => '受到马来西亚数千企业家的信赖',
     
     'testimonial_1_text' => 'MyPay让管理我的在线商店变得非常简单。WhatsApp通知确保我不会错过任何订单!',
-    'testimonial_1_name' => 'Ahmad bin Ali',
+    'testimonial_1_name' => 'Ahmad Bin Ismail',
     'testimonial_1_role' => '在线商店老板',
     
     'testimonial_2_text' => '非常用户友好的平台。仅一周时间,我的商店就开始接收订单了!',
-    'testimonial_2_name' => 'Siti Nurhaliza',
+    'testimonial_2_name' => 'Siti Nurbaiyah',
     'testimonial_2_role' => '企业家',
     
     'testimonial_3_text' => '价格实惠,功能齐全。客户支持也非常响应。强烈推荐!',

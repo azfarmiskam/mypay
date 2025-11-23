@@ -342,7 +342,7 @@
 
             <div class="grid md:grid-cols-4 gap-8 max-w-7xl mx-auto">
                 <!-- Free Plan -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">Percuma</h3>
                     <p class="text-gray-600 mb-6">{{ __('landing.pricing_for_starter') }}</p>
                     <div class="mb-6 h-24 flex flex-col justify-center">
@@ -386,7 +386,7 @@
                 </div>
 
                 <!-- Basic Plan -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">Basic</h3>
                     <p class="text-gray-600 mb-6">{{ __('landing.pricing_for_small') }}</p>
                     <div class="mb-6 h-24 flex flex-col justify-center">
@@ -430,12 +430,17 @@
                 </div>
 
                 <!-- Pro Plan (POPULAR) -->
-                <div class="bg-gradient-primary rounded-2xl p-8 shadow-2xl transform md:scale-105 relative">
+                <div class="bg-gradient-primary rounded-2xl p-8 shadow-2xl transform md:scale-105 relative transition-all duration-300 hover:scale-110">
                     <div
                         class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-secondary-400 text-white px-4 py-1 rounded-full text-sm font-semibold">
                         {{ __('landing.pricing_popular') }}
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-2">Pro</h3>
+                    <h3 class="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+                        Pro
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                        </svg>
+                    </h3>
                     <p class="text-secondary-100 mb-6">{{ __('landing.pricing_for_medium') }}</p>
                     <div class="mb-6 h-24 flex flex-col justify-center">
                         <span class="text-5xl font-bold text-white" x-text="format(300)"></span>
@@ -487,8 +492,13 @@
                 </div>
 
                 <!-- Max Plan -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Max</h3>
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-yellow-400">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                        Max
+                        <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16M19 19H5V21H19V19Z"/>
+                        </svg>
+                    </h3>
                     <p class="text-gray-600 mb-6">{{ __('landing.pricing_for_large') }}</p>
                     <div class="mb-6 h-24 flex flex-col justify-center">
                         <span class="text-5xl font-bold text-primary-900" x-text="format(4000)"></span>
@@ -534,7 +544,7 @@
                         </li>
                     </ul>
                     <a href="/register"
-                        class="block w-full text-center bg-primary-900 text-white py-3 rounded-lg font-semibold hover:bg-primary-800 transition shadow-md hover:shadow-lg">
+                        class="block w-full text-center bg-yellow-400 text-gray-900 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition shadow-md hover:shadow-lg">
                         {{ __('landing.pricing_choose') }} Max
                     </a>
                 </div>
@@ -558,8 +568,7 @@
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6 leading-relaxed">
-                        "MyPay sangat memudahkan pengurusan kedai online saya. Notifikasi WhatsApp memastikan saya tidak
-                        terlepas sebarang pesanan!"
+                        "{{ __('landing.testimonial_1_text') }}"
                     </p>
                     <div class="flex items-center">
                         <div
@@ -567,8 +576,8 @@
                             A
                         </div>
                         <div class="ml-4">
-                            <p class="font-semibold text-gray-900">Ahmad bin Ali</p>
-                            <p class="text-sm text-gray-600">Pemilik Kedai Online</p>
+                            <p class="font-semibold text-gray-900">{{ __('landing.testimonial_1_name') }}</p>
+                            <p class="text-sm text-gray-600">{{ __('landing.testimonial_1_role') }}</p>
                         </div>
                     </div>
                 </div>
@@ -580,8 +589,7 @@
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6 leading-relaxed">
-                        "Platform yang sangat user-friendly. Dalam masa seminggu sahaja kedai saya sudah mula menerima
-                        pesanan!"
+                        "{{ __('landing.testimonial_2_text') }}"
                     </p>
                     <div class="flex items-center">
                         <div
@@ -589,8 +597,8 @@
                             S
                         </div>
                         <div class="ml-4">
-                            <p class="font-semibold text-gray-900">Siti Nurhaliza</p>
-                            <p class="text-sm text-gray-600">Usahawan</p>
+                            <p class="font-semibold text-gray-900">{{ __('landing.testimonial_2_name') }}</p>
+                            <p class="text-sm text-gray-600">{{ __('landing.testimonial_2_role') }}</p>
                         </div>
                     </div>
                 </div>
@@ -602,8 +610,7 @@
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6 leading-relaxed">
-                        "Harga berpatutan dengan fungsi yang lengkap. Sokongan pelanggan juga sangat responsif. Highly
-                        recommended!"
+                        "{{ __('landing.testimonial_3_text') }}"
                     </p>
                     <div class="flex items-center">
                         <div
@@ -611,8 +618,8 @@
                             M
                         </div>
                         <div class="ml-4">
-                            <p class="font-semibold text-gray-900">Muhammad Faiz</p>
-                            <p class="text-sm text-gray-600">Peniaga Online</p>
+                            <p class="font-semibold text-gray-900">{{ __('landing.testimonial_3_name') }}</p>
+                            <p class="text-sm text-gray-600">{{ __('landing.testimonial_3_role') }}</p>
                         </div>
                     </div>
                 </div>

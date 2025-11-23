@@ -73,11 +73,11 @@ return [
     'testimonials_subtitle' => 'Dipercayai oleh ribuan usahawan di seluruh Malaysia',
     
     'testimonial_1_text' => 'MyPay sangat memudahkan pengurusan kedai online saya. Notifikasi WhatsApp memastikan saya tidak terlepas sebarang pesanan!',
-    'testimonial_1_name' => 'Ahmad bin Ali',
+    'testimonial_1_name' => 'Ahmad Bin Ismail',
     'testimonial_1_role' => 'Pemilik Kedai Online',
     
     'testimonial_2_text' => 'Platform yang sangat user-friendly. Dalam masa seminggu sahaja kedai saya sudah mula menerima pesanan!',
-    'testimonial_2_name' => 'Siti Nurhaliza',
+    'testimonial_2_name' => 'Siti Nurbaiyah',
     'testimonial_2_role' => 'Usahawan',
     
     'testimonial_3_text' => 'Harga berpatutan dengan fungsi yang lengkap. Sokongan pelanggan juga sangat responsif. Highly recommended!',
