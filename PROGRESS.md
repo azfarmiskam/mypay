@@ -39,6 +39,8 @@
   - **Dashboard:** 3-degree tilt + zoom on hover
   - **Testimonials:** Alternating tilt (left/right) + zoom on hover
   - **Pricing Cards:** Zoom effect on all cards, extra zoom for Pro plan
+- **Animations:**
+  - **CTA Button:** Wiggle animation (infinite loop) that pauses on hover
 - **Client Carousel:**
   - Auto-playing infinite scroll animation
   - 6 brand logos (Shopee, Lazada, Grab, etc.)

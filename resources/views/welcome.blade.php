@@ -66,6 +66,15 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .animate-wiggle {
+            animation: wiggle 1s ease-in-out infinite;
+        }
     </style>
 </head>
 
@@ -638,7 +647,7 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="/register"
-                    class="bg-white text-primary-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg hover:shadow-xl">
+                    class="bg-white text-primary-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg hover:shadow-xl animate-wiggle hover:animate-none">
                     {{ __('landing.cta_register') }}
                 </a>
                 <a href="#features"
