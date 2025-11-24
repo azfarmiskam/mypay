@@ -1,28 +1,33 @@
 <x-guest-layout>
-    <div class="min-h-screen flex">
+    <div class="min-h-screen flex relative">
+        <!-- Language Switcher -->
+        <div class="absolute top-4 right-4 z-50">
+            <x-language-switcher />
+        </div>
+
         <!-- Left Side - Branding & Info -->
         <div class="hidden lg:flex lg:w-1/2 bg-gradient-primary items-center justify-center p-12">
             <div class="max-w-md text-white">
                 <h1 class="text-5xl font-bold mb-6">MyPay</h1>
-                <p class="text-2xl mb-8 text-secondary-100">Platform E-Dagang Terlengkap & Termudah</p>
+                <p class="text-2xl mb-8 text-secondary-100">{{ __('auth.branding_subtitle') }}</p>
                 <div class="space-y-4">
                     <div class="flex items-start space-x-3">
                         <svg class="w-6 h-6 text-secondary-300 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                         </svg>
-                        <p class="text-secondary-50">Pelbagai Fungsi Dalam Satu Platform</p>
+                        <p class="text-secondary-50">{{ __('auth.feature_1') }}</p>
                     </div>
                     <div class="flex items-start space-x-3">
                         <svg class="w-6 h-6 text-secondary-300 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                         </svg>
-                        <p class="text-secondary-50">Integrasi Gerbang Pembayaran</p>
+                        <p class="text-secondary-50">{{ __('auth.feature_2') }}</p>
                     </div>
                     <div class="flex items-start space-x-3">
                         <svg class="w-6 h-6 text-secondary-300 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                         </svg>
-                        <p class="text-secondary-50">Notifikasi WhatsApp & Email</p>
+                        <p class="text-secondary-50">{{ __('auth.feature_3') }}</p>
                     </div>
                 </div>
             </div>
@@ -34,14 +39,14 @@
                 <!-- Logo for mobile -->
                 <div class="lg:hidden text-center mb-8">
                     <h1 class="text-4xl font-bold text-primary-900">MyPay</h1>
-                    <p class="text-gray-600 mt-2">Platform E-Dagang Terlengkap</p>
+                    <p class="text-gray-600 mt-2">{{ __('auth.branding_subtitle') }}</p>
                 </div>
 
                 <!-- Login Card -->
                 <div class="bg-white rounded-2xl shadow-strong p-8">
                     <div class="text-center mb-8">
-                        <h2 class="text-3xl font-bold text-gray-900">Log Masuk</h2>
-                        <p class="text-gray-600 mt-2">Selamat kembali! Sila log masuk ke akaun anda</p>
+                        <h2 class="text-3xl font-bold text-gray-900">{{ __('auth.title') }}</h2>
+                        <p class="text-gray-600 mt-2">{{ __('auth.subtitle') }}</p>
                     </div>
 
                     <!-- Session Status -->
@@ -53,7 +58,7 @@
                         <!-- Email Address -->
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                                Alamat Emel
+                                {{ __('auth.email_label') }}
                             </label>
                             <input id="email" 
                                    type="email" 
@@ -70,7 +75,7 @@
                         <!-- Password -->
                         <div>
                             <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                                Kata Laluan
+                                {{ __('auth.password_label') }}
                             </label>
                             <input id="password" 
                                    type="password" 
@@ -103,28 +108,28 @@
                                        type="checkbox" 
                                        name="remember"
                                        class="w-4 h-4 text-primary-900 border-gray-300 rounded focus:ring-primary-500">
-                                <span class="ml-2 text-sm text-gray-600">Ingat saya</span>
+                                <span class="ml-2 text-sm text-gray-600">{{ __('auth.remember_me') }}</span>
                             </label>
 
                             @if (Route::has('password.request'))
                                 <a href="{{ route('password.request') }}" class="text-sm text-primary-900 hover:text-primary-700 font-medium">
-                                    Lupa kata laluan?
+                                    {{ __('auth.forgot_password') }}
                                 </a>
                             @endif
                         </div>
 
                         <!-- Login Button -->
                         <button type="submit" class="w-full bg-primary-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 transition-all shadow-md hover:shadow-lg">
-                            Log Masuk
+                            {{ __('auth.login_button') }}
                         </button>
                     </form>
 
                     <!-- Register Link -->
                     <div class="mt-6 text-center">
                         <p class="text-gray-600">
-                            Belum mempunyai akaun? 
+                            {{ __('auth.register_text') }}
                             <a href="{{ route('register') }}" class="text-primary-900 hover:text-primary-700 font-semibold">
-                                Daftar Sekarang
+                                {{ __('auth.register_link') }}
                             </a>
                         </p>
                     </div>
@@ -132,7 +137,7 @@
 
                 <!-- Footer Links -->
                 <div class="mt-8 text-center text-sm text-gray-600">
-                    <p>© 2025 MyPay. Hak Cipta Terpelihara.</p>
+                    <p>© 2025 MyPay. {{ __('auth.footer_copyright') }}</p>
                 </div>
             </div>
         </div>
