@@ -9,6 +9,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
+    $user = auth()->user();
+    
+    if ($user->role === 'superadmin' || $user->role === 'admin') {
+        return redirect()->route('superadmin.dashboard');
+    }
+    
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 

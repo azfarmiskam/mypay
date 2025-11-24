@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,26 +14,30 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // Get dashboard metrics
-        $metrics = [
-            'total_sellers' => \App\Models\User::sellers()->count(),
-            'active_subscriptions' => 0, // Will be implemented when Subscription model is ready
-            'monthly_revenue' => 0, // Will be calculated from subscription payments
-            'system_health' => 'Healthy', // Can be enhanced with actual health checks
-        ];
-
-        // Get recent seller registrations (last 10)
-        $recentSellers = \App\Models\User::sellers()
+        // Dashboard metrics
+        $totalSellers = User::where('role', 'seller')->count();
+        $activeSubscriptions = 0; // Placeholder until Subscription model is created
+        $monthlyRevenue = 0; // Placeholder until SubscriptionPayment model is created
+        
+        $recentSellers = User::where('role', 'seller')
             ->latest()
-            ->take(10)
+            ->take(5)
+            ->get();
+        
+        $plans = Plan::all();
+
+        // Admin management data
+        $admins = User::where('role', 'admin')
+            ->orderBy('created_at', 'desc')
             ->get();
 
-        // Get all plans with subscription counts
-        $plans = \App\Models\Plan::active()
-            ->visible()
-            ->orderBy('sort_order')
-            ->get();
-
-        return view('superadmin.dashboard', compact('metrics', 'recentSellers', 'plans'));
+        return view('superadmin.dashboard', compact(
+            'totalSellers',
+            'activeSubscriptions',
+            'monthlyRevenue',
+            'recentSellers',
+            'plans',
+            'admins'
+        ));
     }
 }

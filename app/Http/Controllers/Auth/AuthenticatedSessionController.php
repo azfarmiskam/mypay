@@ -37,6 +37,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Update last login timestamp
+        auth()->user()->update(['last_login_at' => now()]);
+
         // Redirect based on user role
         $user = auth()->user();
         

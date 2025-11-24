@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SuperAdmin\DashboardController;
+use App\Http\Controllers\SuperAdmin\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,12 +14,13 @@ Route::middleware(['web', 'auth', 'superadmin'])->prefix('superadmin')->name('su
     // Profile
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     
+    // Admin Management
+    Route::resource('admins', AdminController::class)->except(['show', 'create', 'edit']);
+    Route::patch('/admins/{admin}/reset-password', [AdminController::class, 'resetPassword'])->name('admins.resetPassword');
+    
     // System Settings
     // Route::get('/settings', [SystemSettingsController::class, 'index'])->name('settings.index');
     // Route::post('/settings', [SystemSettingsController::class, 'update'])->name('settings.update');
-    
-    // Admin Management
-    // Route::resource('admins', AdminController::class);
     
     // Seller Management
     // Route::resource('sellers', SellerController::class);

@@ -19,7 +19,15 @@
 
     @stack('styles')
 </head>
-<body class="font-sans antialiased bg-gray-50" x-data="{ sidebarOpen: true }">
+<body class="font-sans antialiased bg-gray-50" x-data="{
+    sidebarOpen: true,
+    activeSection: '{{ session('activeSection', 'dashboard') }}',
+    showAddModal: false,
+    showEditModal: false,
+    showDeleteModal: false,
+    editAdmin: {},
+    deleteAdmin: {}
+}">
     <div class="min-h-screen">
         <!-- Sidebar -->
         <aside :class="sidebarOpen ? 'w-64' : 'w-20'" class="fixed inset-y-0 left-0 bg-gradient-to-b from-blue-900 to-blue-800 text-white shadow-xl z-50 transition-all duration-300">
@@ -37,14 +45,14 @@
                 </button>
             </div>
 
-            <!-- Navigation -->
-            <nav class="px-4">
+            <!-- Navigation Menu -->
+            <nav class="flex-1 px-4 py-2">
                 <!-- Dashboard -->
                 <div class="relative group">
-                    <a href="{{ route('superadmin.dashboard') }}" class="flex items-center px-4 py-3 mb-2 rounded-lg bg-blue-700 text-white">
+                    <button @click="activeSection = 'dashboard'" class="w-full flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition" :class="{ 'bg-blue-700': activeSection === 'dashboard' }">
                         <i class="fas fa-chart-line w-5"></i>
                         <span x-show="sidebarOpen" class="ml-3 font-medium transition-opacity duration-300">{{ __('dashboard.dashboard') }}</span>
-                    </a>
+                    </button>
                     <div x-show="!sidebarOpen" class="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap top-0">
                         {{ __('dashboard.dashboard') }}
                     </div>
@@ -52,10 +60,10 @@
 
                 <!-- System Settings -->
                 <div class="relative group">
-                    <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition">
+                    <button @click="activeSection = 'settings'" class="w-full flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition" :class="{ 'bg-blue-700': activeSection === 'settings' }">
                         <i class="fas fa-cog w-5"></i>
                         <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">{{ __('dashboard.system_settings') }}</span>
-                    </a>
+                    </button>
                     <div x-show="!sidebarOpen" class="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap top-0">
                         {{ __('dashboard.system_settings') }}
                     </div>
@@ -63,10 +71,10 @@
 
                 <!-- Admins -->
                 <div class="relative group">
-                    <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition">
+                    <button @click="activeSection = 'admins'" class="w-full flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition" :class="{ 'bg-blue-700': activeSection === 'admins' }">
                         <i class="fas fa-users-cog w-5"></i>
                         <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">{{ __('dashboard.admins') }}</span>
-                    </a>
+                    </button>
                     <div x-show="!sidebarOpen" class="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap top-0">
                         {{ __('dashboard.admins') }}
                     </div>
@@ -74,10 +82,10 @@
 
                 <!-- Sellers -->
                 <div class="relative group">
-                    <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition">
+                    <button @click="activeSection = 'sellers'" class="w-full flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition" :class="{ 'bg-blue-700': activeSection === 'sellers' }">
                         <i class="fas fa-store w-5"></i>
                         <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">{{ __('dashboard.sellers') }}</span>
-                    </a>
+                    </button>
                     <div x-show="!sidebarOpen" class="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap top-0">
                         {{ __('dashboard.sellers') }}
                     </div>
@@ -85,10 +93,10 @@
 
                 <!-- Plans -->
                 <div class="relative group">
-                    <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition">
+                    <button @click="activeSection = 'plans'" class="w-full flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition" :class="{ 'bg-blue-700': activeSection === 'plans' }">
                         <i class="fas fa-tags w-5"></i>
                         <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">{{ __('dashboard.plans') }}</span>
-                    </a>
+                    </button>
                     <div x-show="!sidebarOpen" class="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap top-0">
                         {{ __('dashboard.plans') }}
                     </div>
@@ -96,10 +104,10 @@
 
                 <!-- Analytics -->
                 <div class="relative group">
-                    <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition">
+                    <button @click="activeSection = 'analytics'" class="w-full flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition" :class="{ 'bg-blue-700': activeSection === 'analytics' }">
                         <i class="fas fa-chart-bar w-5"></i>
                         <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">{{ __('dashboard.analytics') }}</span>
-                    </a>
+                    </button>
                     <div x-show="!sidebarOpen" class="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap top-0">
                         {{ __('dashboard.analytics') }}
                     </div>

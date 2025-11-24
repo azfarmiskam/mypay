@@ -98,11 +98,26 @@
                     <a href="#testimonials"
                         class="text-gray-700 hover:text-primary-900 font-medium transition">{{ __('landing.nav_testimonials') }}</a>
                     <x-language-switcher />
-                    <a href="/login" class="text-primary-900 hover:text-primary-700 font-medium transition">{{ __('landing.nav_login') }}</a>
-                    <a href="/register"
-                        class="bg-primary-900 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-primary-800 transition shadow-md hover:shadow-lg">
-                        {{ __('landing.nav_register') }}
-                    </a>
+                    
+                    @auth
+                        @if(auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin')
+                            <a href="{{ route('superadmin.dashboard') }}" class="text-primary-900 hover:text-primary-700 font-medium transition">Dashboard</a>
+                        @else
+                            <a href="{{ route('dashboard') }}" class="text-primary-900 hover:text-primary-700 font-medium transition">Dashboard</a>
+                        @endif
+                        <form method="POST" action="{{ route('logout') }}" class="inline">
+                            @csrf
+                            <button type="submit" class="bg-primary-900 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-primary-800 transition shadow-md hover:shadow-lg">
+                                Logout
+                            </button>
+                        </form>
+                    @else
+                        <a href="/login" class="text-primary-900 hover:text-primary-700 font-medium transition">{{ __('landing.nav_login') }}</a>
+                        <a href="/register"
+                            class="bg-primary-900 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-primary-800 transition shadow-md hover:shadow-lg">
+                            {{ __('landing.nav_register') }}
+                        </a>
+                    @endauth
                 </div>
                 <button class="md:hidden text-gray-700">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
