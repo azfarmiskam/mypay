@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SuperAdmin\DashboardController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // SuperAdmin Routes
@@ -8,6 +9,9 @@ Route::middleware(['web', 'auth', 'superadmin'])->prefix('superadmin')->name('su
     
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
+    // Profile
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     
     // System Settings
     // Route::get('/settings', [SystemSettingsController::class, 'index'])->name('settings.index');
@@ -25,4 +29,3 @@ Route::middleware(['web', 'auth', 'superadmin'])->prefix('superadmin')->name('su
     // Analytics
     // Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
 });
-

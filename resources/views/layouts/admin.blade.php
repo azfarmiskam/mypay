@@ -109,9 +109,14 @@
             <!-- User Section -->
             <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-blue-700">
                 <div class="flex items-center" :class="sidebarOpen ? 'justify-start' : 'justify-center'">
-                    <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-user text-white"></i>
-                    </div>
+                    <!-- Avatar (clickable) -->
+                    <button @click="$dispatch('open-profile-modal')" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0 hover:ring-2 hover:ring-blue-400 transition">
+                        @if(auth()->user()->avatar)
+                            <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar" class="w-full h-full rounded-full object-cover">
+                        @else
+                            <i class="fas fa-user text-white"></i>
+                        @endif
+                    </button>
                     <div x-show="sidebarOpen" class="ml-3 flex-1 transition-opacity duration-300">
                         <p class="text-sm font-medium">{{ auth()->user()->name }}</p>
                         <p class="text-xs text-blue-300">{{ __('dashboard.superadmin') }}</p>
@@ -232,6 +237,10 @@
         updateTime();
         setInterval(updateTime, 1000);
     </script>
+    
+    <!-- Profile Modal -->
+    @include('components.profile-modal')
+    
     @stack('scripts')
 </body>
 </html>
