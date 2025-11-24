@@ -101,13 +101,6 @@
                                             class="text-blue-600 hover:text-blue-800 mr-3">
                                         <i class="fas fa-edit"></i> Edit
                                     </button>
-                                    <form action="{{ route('superadmin.admins.resetPassword', $admin) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="text-green-600 hover:text-green-800 mr-3">
-                                            <i class="fas fa-key"></i> Reset
-                                        </button>
-                                    </form>
                                     <button @click="deleteAdmin = {{ $admin->toJson() }}; showDeleteModal = true" 
                                             class="text-red-600 hover:text-red-800">
                                         <i class="fas fa-trash"></i> Delete
