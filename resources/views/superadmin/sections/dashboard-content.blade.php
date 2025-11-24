@@ -101,7 +101,7 @@
 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
     <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('dashboard.quick_actions') }}</h3>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <button class="p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition text-center">
+        <button @click="activeSection = 'admins'; showAddModal = true" class="p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition text-center">
             <i class="fas fa-user-plus text-2xl text-blue-600 mb-2"></i>
             <p class="text-sm font-medium text-gray-700">{{ __('dashboard.add_new_admin') }}</p>
         </button>
