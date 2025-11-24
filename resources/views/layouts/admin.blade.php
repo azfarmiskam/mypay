@@ -175,13 +175,13 @@
                                 <i class="far fa-clock mr-2"></i>
                                 <span id="current-time"></span>
                             </div>
-                            <!-- Tooltip -->
-                            <div class="absolute right-0 bottom-full mb-2 px-4 py-3 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg">
+                            <!-- Tooltip (appears below) -->
+                            <div class="absolute right-0 top-full mt-2 px-4 py-3 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg z-50">
                                 <div class="font-semibold" id="tooltip-day"></div>
                                 <div id="tooltip-date"></div>
                                 <div class="text-blue-300 mt-1" id="tooltip-time"></div>
-                                <!-- Arrow -->
-                                <div class="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+                                <!-- Arrow pointing up -->
+                                <div class="absolute bottom-full right-4 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-gray-900"></div>
                             </div>
                         </div>
                     </div>

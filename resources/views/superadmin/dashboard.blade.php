@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', __('dashboard.dashboard'))
-@section('page-title', __('dashboard.dashboard'))
-@section('page-description', __('dashboard.welcome_back'))
+@section('title', 'Super Admin Dashboard')
+@section('page-title', 'Super Admin Dashboard')
+@section('page-description', 'Welcome back, ' . auth()->user()->name)
 
 @section('content')
 <!-- Metrics Cards -->
