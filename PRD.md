@@ -6,7 +6,7 @@
 **Project Name:** MyPay SaaS Platform  
 **Inspired By:** OnPay.my
 
-**Latest Progress:** Professional login page design with glassmorphism, animations, and optimized layout
+**Latest Progress:** Buyer authentication flow defined (Guest Checkout + Optional Account strategy)
 
 ---
 
@@ -165,6 +165,72 @@ A comprehensive multi-tenant SaaS platform that enables sellers to create online
 2. System detects user role (SuperAdmin/Admin/Seller/Buyer)
 3. Redirect to appropriate dashboard
 4. Session maintained with role-based permissions
+
+#### Buyer Authentication Strategy (Guest Checkout + Optional Account)
+
+**Approach:** Hybrid model that maximizes conversions while building buyer database
+
+**Guest Checkout (Default):**
+- Buyers can purchase WITHOUT creating an account
+- Only requires: Name, Email, Phone, Delivery Address
+- Receives order confirmation + unique tracking link
+- No registration barrier = Higher conversion rates
+
+**Optional Account Creation:**
+- Post-purchase email includes "Create Account" CTA
+- One-click account creation (email pre-filled)
+- Past orders automatically linked to new account
+- Benefits: Order history, saved addresses, faster checkout
+
+**Cross-Seller Authentication:**
+- One MyPay buyer account works across ALL seller sites
+- Login on any seller site = Access to unified order history
+- Session valid across all *.mypay.com subdomains
+- No need to re-register for different sellers
+
+**Registration Locations:**
+- **Seller Registration:** Only on main MyPay site (mypay.com)
+  - Route: `/seller/register`
+  - Includes: Business details, plan selection, payment setup
+- **Buyer Registration:** Only on seller landing pages
+  - Route: `/buyer/register` (on seller sites)
+  - Simple form: Name, email, password
+  - OR auto-created from guest checkout email link
+
+**Login Strategy:**
+- **Unified Login Page:** `mypay.com/login`
+- System auto-detects user role (Seller/Buyer/Admin/SuperAdmin)
+- Redirects to appropriate dashboard
+- Works across all seller sites
+
+**Order Tracking System:**
+- Universal tracking page: `mypay.com/track/{tracking_code}`
+- Works for both guest and registered buyers
+- No login required to view order status
+- Each order gets unique tracking code
+- Tracking link sent via email/WhatsApp
+
+**Database Structure:**
+```
+buyers table:
+- id, email, password, name, phone
+
+orders table:
+- id, seller_id, buyer_id (nullable)
+- guest_email (nullable for guest orders)
+- tracking_code (unique)
+- status, created_at
+
+When guest creates account:
+- Migrate guest orders to buyer_id
+```
+
+**Benefits:**
+- ✅ Higher conversion rates (no registration friction)
+- ✅ Better UX (quick checkout for first-time buyers)
+- ✅ Platform-wide buyer insights
+- ✅ Cross-seller marketing opportunities
+- ✅ Organic buyer database growth
 
 ### 4.2 Subscription Management
 
