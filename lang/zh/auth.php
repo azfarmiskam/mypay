@@ -26,4 +26,13 @@ return [
     
     // Footer
     'footer_copyright' => '版权所有。',
+    
+    // Registration page
+    'register_title' => '创建账户',
+    'register_subtitle' => '加入 MyPay，开启您的电子商务之旅',
+    'name_label' => '全名',
+    'confirm_password_label' => '确认密码',
+    'register_button' => '创建账户',
+    'login_text' => '已有账户？',
+    'login_link' => '登录',
 ];

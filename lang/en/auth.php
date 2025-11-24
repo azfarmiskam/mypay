@@ -26,4 +26,13 @@ return [
     
     // Footer
     'footer_copyright' => 'All Rights Reserved.',
+    
+    // Registration page
+    'register_title' => 'Create Account',
+    'register_subtitle' => 'Join MyPay and start your e-commerce journey',
+    'name_label' => 'Full Name',
+    'confirm_password_label' => 'Confirm Password',
+    'register_button' => 'Create Account',
+    'login_text' => 'Already have an account?',
+    'login_link' => 'Sign In',
 ];

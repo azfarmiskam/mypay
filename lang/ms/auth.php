@@ -26,4 +26,13 @@ return [
     
     // Footer
     'footer_copyright' => 'Hak Cipta Terpelihara.',
+    
+    // Registration page
+    'register_title' => 'Cipta Akaun',
+    'register_subtitle' => 'Sertai MyPay dan mulakan perjalanan e-dagang anda',
+    'name_label' => 'Nama Penuh',
+    'confirm_password_label' => 'Sahkan Kata Laluan',
+    'register_button' => 'Cipta Akaun',
+    'login_text' => 'Sudah mempunyai akaun?',
+    'login_link' => 'Log Masuk',
 ];

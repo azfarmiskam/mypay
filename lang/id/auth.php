@@ -26,4 +26,13 @@ return [
     
     // Footer
     'footer_copyright' => 'Hak Cipta Dilindungi.',
+    
+    // Registration page
+    'register_title' => 'Buat Akun',
+    'register_subtitle' => 'Bergabunglah dengan MyPay dan mulai perjalanan e-commerce Anda',
+    'name_label' => 'Nama Lengkap',
+    'confirm_password_label' => 'Konfirmasi Kata Sandi',
+    'register_button' => 'Buat Akun',
+    'login_text' => 'Sudah punya akun?',
+    'login_link' => 'Masuk',
 ];
