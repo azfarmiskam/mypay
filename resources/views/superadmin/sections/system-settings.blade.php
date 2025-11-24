@@ -138,12 +138,143 @@
         </div>
 
         <!-- Tab Content: Super Admins -->
-        <div x-show="activeTab === 'super-admins'" class="p-6">
-            <div class="text-center py-12 text-gray-500">
-                <i class="fas fa-user-shield text-4xl mb-4 block text-gray-300"></i>
-                <p class="text-lg font-medium">Super Admins Management</p>
-                <p class="text-sm mt-2">This feature will be implemented soon</p>
+        <div x-show="activeTab === 'super-admins'" class="p-6" x-data="{ showAddModal: false, showEditModal: false, showDeleteModal: false, editAdmin: null, deleteAdmin: null }">
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Super Admins Management</h3>
+                
+                <!-- Search and Add Button -->
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                    <!-- Search Bar -->
+                    <div class="flex-1 max-w-md">
+                        <div class="relative">
+                            <input type="text" 
+                                   x-model="adminSearch"
+                                   placeholder="Search by name or email..." 
+                                   class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Add Super Admin Button -->
+                    <button @click="showAddModal = true" 
+                            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
+                        <i class="fas fa-plus mr-2"></i>Add Super Admin
+                    </button>
+                </div>
+
+                <!-- Super Admins List -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Login</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                @php
+                                    $superAdmins = \App\Models\User::where('role', 'superadmin')->orWhere('role', 'admin')->latest()->get();
+                                @endphp
+                                @forelse($superAdmins as $admin)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <span class="text-blue-600 font-semibold">{{ substr($admin->name, 0, 1) }}</span>
+                                            </div>
+                                            <span class="font-medium text-gray-900">{{ $admin->name }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ $admin->email }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full 
+                                            {{ $admin->role === 'superadmin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }}">
+                                            {{ ucfirst($admin->role) }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full 
+                                            {{ $admin->status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                            {{ ucfirst($admin->status) }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                                        @if($admin->last_login_at)
+                                            <span title="{{ $admin->last_login_at->format('M d, Y H:i:s') }}">
+                                                {{ $admin->last_login_at->diffForHumans() }}
+                                            </span>
+                                        @else
+                                            <span class="text-gray-400">Never</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <button @click="editAdmin = {{ $admin->toJson() }}; showEditModal = true" 
+                                                class="text-blue-600 hover:text-blue-800 mr-3">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+                                        <button @click="deleteAdmin = {{ $admin->toJson() }}; showDeleteModal = true" 
+                                                class="text-red-600 hover:text-red-800">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="6" class="px-6 py-12 text-center text-gray-500">
+                                        <i class="fas fa-user-shield text-4xl mb-4 block text-gray-300"></i>
+                                        <p>No super admins found</p>
+                                    </td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Activity Logs Section -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="p-6 border-b border-gray-200">
+                        <h4 class="text-md font-semibold text-gray-800">Activity Logs</h4>
+                        <p class="text-sm text-gray-600 mt-1">Recent super admin activities</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Timestamp</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Admin</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IP Address</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td colspan="5" class="px-6 py-12 text-center text-gray-500">
+                                        <i class="fas fa-history text-4xl mb-4 block text-gray-300"></i>
+                                        <p class="text-lg font-medium">Activity Logs</p>
+                                        <p class="text-sm mt-2">Activity logging will be implemented soon</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+
+            <!-- Add Super Admin Modal -->
+            @include('superadmin.admins.partials.add-modal')
+
+            <!-- Edit Super Admin Modal -->
+            @include('superadmin.admins.partials.edit-modal')
+
+            <!-- Delete Confirmation Modal -->
+            @include('superadmin.admins.partials.delete-modal')
         </div>
 
         <!-- Tab Content: Contents -->
