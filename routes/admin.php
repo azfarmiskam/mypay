@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SuperAdmin\DashboardController;
 use App\Http\Controllers\SuperAdmin\AdminController;
+use App\Http\Controllers\SuperAdmin\SettingsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,13 @@ Route::middleware(['web', 'auth', 'superadmin'])->prefix('superadmin')->name('su
     Route::post('/superadmins', [AdminController::class, 'storeSuperAdmin'])->name('superadmins.store');
     Route::put('/superadmins/{admin}', [AdminController::class, 'updateSuperAdmin'])->name('superadmins.update');
     Route::delete('/superadmins/{admin}', [AdminController::class, 'destroySuperAdmin'])->name('superadmins.destroy');
+    
+    // System Settings routes
+    Route::post('/settings/site-info', [SettingsController::class, 'updateSiteInfo'])->name('settings.siteInfo.update');
+    Route::post('/settings/branding', [SettingsController::class, 'updateBranding'])->name('settings.branding.update');
+    Route::post('/settings/colors', [SettingsController::class, 'updateColors'])->name('settings.colors.update');
+    Route::post('/settings/timezone', [SettingsController::class, 'updateTimezone'])->name('settings.timezone.update');
+    
     
     // System Settings
     // Route::get('/settings', [SystemSettingsController::class, 'index'])->name('settings.index');

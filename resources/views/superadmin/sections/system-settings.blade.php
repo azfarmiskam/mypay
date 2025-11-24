@@ -37,103 +37,169 @@
                 <h3 class="text-lg font-semibold text-gray-900 mb-6">General Settings</h3>
                 
                 <!-- Site Information -->
-                <div class="bg-gray-50 rounded-lg p-6 mb-6">
-                    <h4 class="text-md font-semibold text-gray-800 mb-4">Site Information</h4>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Site Name</label>
-                            <input type="text" value="MyPay" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <p class="text-xs text-gray-500 mt-1">Displayed in browser title and emails</p>
+                <form action="{{ route('superadmin.settings.siteInfo.update') }}" method="POST">
+                    @csrf
+                    <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                        <h4 class="text-md font-semibold text-gray-800 mb-4">Site Information</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Site Name</label>
+                                <input type="text" name="site_name" value="{{ $settings->site_name ?? 'MyPay' }}" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                <p class="text-xs text-gray-500 mt-1">Displayed in browser title and emails</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">System Name</label>
+                                <input type="text" name="system_name" value="{{ $settings->system_name ?? 'MyPay Payment System' }}" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                <p class="text-xs text-gray-500 mt-1">Displayed throughout the system interface</p>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">System Name</label>
-                            <input type="text" value="MyPay Payment System" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <p class="text-xs text-gray-500 mt-1">Displayed throughout the system interface</p>
+                        <div class="flex justify-end mt-4">
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
+                                <i class="fas fa-save mr-2"></i>Save Changes
+                            </button>
                         </div>
                     </div>
-                </div>
+                </form>
 
                 <!-- Branding -->
-                <div class="bg-gray-50 rounded-lg p-6 mb-6">
-                    <h4 class="text-md font-semibold text-gray-800 mb-4">Branding</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Logo</label>
-                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition cursor-pointer">
-                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
-                                <p class="text-sm text-gray-600">Click to upload or drag and drop</p>
-                                <p class="text-xs text-gray-500 mt-1">PNG, JPG up to 2MB</p>
+                <form action="{{ route('superadmin.settings.branding.update') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                        <h4 class="text-md font-semibold text-gray-800 mb-4">Branding</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Logo</label>
+                                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition cursor-pointer">
+                                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                                    <p class="text-sm text-gray-600">Click to upload or drag and drop</p>
+                                    <p class="text-xs text-gray-500 mt-1">PNG, JPG up to 2MB</p>
+                                    <input type="file" name="logo" class="hidden" accept="image/png,image/jpeg">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Favicon</label>
+                                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition cursor-pointer">
+                                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                                    <p class="text-sm text-gray-600">Click to upload or drag and drop</p>
+                                    <p class="text-xs text-gray-500 mt-1">ICO, PNG 16x16 or 32x32</p>
+                                    <input type="file" name="favicon" class="hidden" accept="image/x-icon,image/png">
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Favicon</label>
-                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition cursor-pointer">
-                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
-                                <p class="text-sm text-gray-600">Click to upload or drag and drop</p>
-                                <p class="text-xs text-gray-500 mt-1">ICO, PNG 16x16 or 32x32</p>
-                            </div>
+                        <div class="flex justify-end mt-4">
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
+                                <i class="fas fa-save mr-2"></i>Save Changes
+                            </button>
                         </div>
                     </div>
-                </div>
+                </form>
 
                 <!-- Color Scheme -->
-                <div class="bg-gray-50 rounded-lg p-6 mb-6">
-                    <h4 class="text-md font-semibold text-gray-800 mb-4">Color Scheme</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Title Color</label>
-                            <div class="flex items-center gap-3">
-                                <input type="color" value="#1F2937" class="h-10 w-20 rounded border border-gray-300 cursor-pointer">
-                                <input type="text" value="#1F2937" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <form action="{{ route('superadmin.settings.colors.update') }}" method="POST">
+                    @csrf
+                    <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                        <h4 class="text-md font-semibold text-gray-800 mb-4">Color Scheme</h4>
+                        
+                        <!-- System Color Theme -->
+                        <div class="mb-6">
+                            <h5 class="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">System Color Theme</h5>
+                            <div class="grid grid-cols-3 gap-4">
+                                <!-- Main Color -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Main Color</label>
+                                    <input type="color" 
+                                           name="main_color"
+                                           value="{{ $settings->main_color ?? '#1E3A8A' }}"
+                                           class="w-full h-12 rounded-lg border-2 border-gray-300 cursor-pointer hover:border-blue-500 transition">
+                                </div>
+
+                                <!-- Secondary Color -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Secondary Color</label>
+                                    <input type="color" 
+                                           name="secondary_color"
+                                           value="{{ $settings->secondary_color ?? '#3B82F6' }}"
+                                           class="w-full h-12 rounded-lg border-2 border-gray-300 cursor-pointer hover:border-blue-500 transition">
+                                </div>
+
+                                <!-- Third Color -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Third Color</label>
+                                    <input type="color" 
+                                           name="third_color"
+                                           value="{{ $settings->third_color ?? '#60A5FA' }}"
+                                           class="w-full h-12 rounded-lg border-2 border-gray-300 cursor-pointer hover:border-blue-500 transition">
+                                </div>
                             </div>
                         </div>
+
+                        <!-- Content Color Theme -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Subtitle Color</label>
-                            <div class="flex items-center gap-3">
-                                <input type="color" value="#4B5563" class="h-10 w-20 rounded border border-gray-300 cursor-pointer">
-                                <input type="text" value="#4B5563" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <h5 class="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">Content Color Theme</h5>
+                            <div class="grid grid-cols-3 gap-4">
+                                <!-- Title Color -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Title Color</label>
+                                    <input type="color" 
+                                           name="title_color"
+                                           value="{{ $settings->title_color ?? '#1F2937' }}"
+                                           class="w-full h-12 rounded-lg border-2 border-gray-300 cursor-pointer hover:border-blue-500 transition">
+                                </div>
+
+                                <!-- Sub-Title Color -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Sub-Title Color</label>
+                                    <input type="color" 
+                                           name="subtitle_color"
+                                           value="{{ $settings->subtitle_color ?? '#4B5563' }}"
+                                           class="w-full h-12 rounded-lg border-2 border-gray-300 cursor-pointer hover:border-blue-500 transition">
+                                </div>
+
+                                <!-- Content Color -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Content Color</label>
+                                    <input type="color" 
+                                           name="content_color"
+                                           value="{{ $settings->content_color ?? '#6B7280' }}"
+                                           class="w-full h-12 rounded-lg border-2 border-gray-300 cursor-pointer hover:border-blue-500 transition">
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Content Color</label>
-                            <div class="flex items-center gap-3">
-                                <input type="color" value="#6B7280" class="h-10 w-20 rounded border border-gray-300 cursor-pointer">
-                                <input type="text" value="#6B7280" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Primary Color</label>
-                            <div class="flex items-center gap-3">
-                                <input type="color" value="#1E3A8A" class="h-10 w-20 rounded border border-gray-300 cursor-pointer">
-                                <input type="text" value="#1E3A8A" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            </div>
+
+                        <div class="flex justify-end mt-6">
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
+                                <i class="fas fa-save mr-2"></i>Save Changes
+                            </button>
                         </div>
                     </div>
-                </div>
+                </form>
 
                 <!-- Timezone -->
-                <div class="bg-gray-50 rounded-lg p-6 mb-6">
-                    <h4 class="text-md font-semibold text-gray-800 mb-4">Timezone</h4>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">System Timezone</label>
-                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="UTC">UTC (Coordinated Universal Time)</option>
-                            <option value="Asia/Kuala_Lumpur">Asia/Kuala_Lumpur (UTC+8)</option>
-                            <option value="Asia/Singapore">Asia/Singapore (UTC+8)</option>
-                            <option value="Asia/Jakarta">Asia/Jakarta (UTC+7)</option>
-                            <option value="America/New_York">America/New_York (UTC-5)</option>
-                            <option value="Europe/London">Europe/London (UTC+0)</option>
-                        </select>
-                        <p class="text-xs text-gray-500 mt-1">All timestamps will be displayed in this timezone</p>
+                <form action="{{ route('superadmin.settings.timezone.update') }}" method="POST">
+                    @csrf
+                    <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                        <h4 class="text-md font-semibold text-gray-800 mb-4">Timezone</h4>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">System Timezone</label>
+                            <select name="timezone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="UTC" {{ ($settings->timezone ?? 'UTC') == 'UTC' ? 'selected' : '' }}>UTC (Coordinated Universal Time)</option>
+                                <option value="Asia/Kuala_Lumpur" {{ ($settings->timezone ?? '') == 'Asia/Kuala_Lumpur' ? 'selected' : '' }}>Asia/Kuala_Lumpur (UTC+8)</option>
+                                <option value="Asia/Singapore" {{ ($settings->timezone ?? '') == 'Asia/Singapore' ? 'selected' : '' }}>Asia/Singapore (UTC+8)</option>
+                                <option value="Asia/Jakarta" {{ ($settings->timezone ?? '') == 'Asia/Jakarta' ? 'selected' : '' }}>Asia/Jakarta (UTC+7)</option>
+                                <option value="America/New_York" {{ ($settings->timezone ?? '') == 'America/New_York' ? 'selected' : '' }}>America/New_York (UTC-5)</option>
+                                <option value="Europe/London" {{ ($settings->timezone ?? '') == 'Europe/London' ? 'selected' : '' }}>Europe/London (UTC+0)</option>
+                            </select>
+                            <p class="text-xs text-gray-500 mt-1">All timestamps will be displayed in this timezone</p>
+                        </div>
+                        <div class="flex justify-end mt-4">
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
+                                <i class="fas fa-save mr-2"></i>Save Changes
+                            </button>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Save Button -->
-                <div class="flex justify-end">
-                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
-                        <i class="fas fa-save mr-2"></i>Save Changes
-                    </button>
-                </div>
+                </form>
             </div>
         </div>
 
