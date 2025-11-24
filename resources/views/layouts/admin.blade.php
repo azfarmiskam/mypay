@@ -169,10 +169,20 @@
                             <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                         </button>
 
-                        <!-- Current Time -->
-                        <div class="text-sm text-gray-600">
-                            <i class="far fa-clock mr-2"></i>
-                            <span id="current-time"></span>
+                        <!-- Current Time with Tooltip -->
+                        <div class="relative group">
+                            <div class="text-sm text-gray-600 cursor-pointer">
+                                <i class="far fa-clock mr-2"></i>
+                                <span id="current-time"></span>
+                            </div>
+                            <!-- Tooltip -->
+                            <div class="absolute right-0 bottom-full mb-2 px-4 py-3 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg">
+                                <div class="font-semibold" id="tooltip-day"></div>
+                                <div id="tooltip-date"></div>
+                                <div class="text-blue-300 mt-1" id="tooltip-time"></div>
+                                <!-- Arrow -->
+                                <div class="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -185,6 +195,43 @@
         </div>
     </div>
 
+    <script>
+        // Update time every second
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+
+            // Update clock display
+            document.getElementById('current-time').textContent = timeString;
+
+            // Update tooltip
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+            const dayName = days[now.getDay()];
+            const monthName = months[now.getMonth()];
+            const date = now.getDate();
+            const year = now.getFullYear();
+
+            const fullTimeString = now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+
+            document.getElementById('tooltip-day').textContent = dayName;
+            document.getElementById('tooltip-date').textContent = `${monthName} ${date}, ${year}`;
+            document.getElementById('tooltip-time').textContent = fullTimeString;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
     @stack('scripts')
 </body>
 </html>
