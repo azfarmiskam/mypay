@@ -43,10 +43,10 @@
                 <div class="relative group">
                     <a href="{{ route('superadmin.dashboard') }}" class="flex items-center px-4 py-3 mb-2 rounded-lg bg-blue-700 text-white">
                         <i class="fas fa-chart-line w-5"></i>
-                        <span x-show="sidebarOpen" class="ml-3 font-medium transition-opacity duration-300">Dashboard</span>
+                        <span x-show="sidebarOpen" class="ml-3 font-medium transition-opacity duration-300">{{ __('dashboard.dashboard') }}</span>
                     </a>
                     <div x-show="!sidebarOpen" class="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap top-0">
-                        Dashboard
+                        {{ __('dashboard.dashboard') }}
                     </div>
                 </div>
 
@@ -54,10 +54,10 @@
                 <div class="relative group">
                     <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition">
                         <i class="fas fa-cog w-5"></i>
-                        <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">System Settings</span>
+                        <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">{{ __('dashboard.system_settings') }}</span>
                     </a>
                     <div x-show="!sidebarOpen" class="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap top-0">
-                        System Settings
+                        {{ __('dashboard.system_settings') }}
                     </div>
                 </div>
 
@@ -65,10 +65,10 @@
                 <div class="relative group">
                     <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition">
                         <i class="fas fa-users-cog w-5"></i>
-                        <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">Admins</span>
+                        <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">{{ __('dashboard.admins') }}</span>
                     </a>
                     <div x-show="!sidebarOpen" class="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap top-0">
-                        Admins
+                        {{ __('dashboard.admins') }}
                     </div>
                 </div>
 
@@ -76,10 +76,10 @@
                 <div class="relative group">
                     <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition">
                         <i class="fas fa-store w-5"></i>
-                        <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">Sellers</span>
+                        <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">{{ __('dashboard.sellers') }}</span>
                     </a>
                     <div x-show="!sidebarOpen" class="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap top-0">
-                        Sellers
+                        {{ __('dashboard.sellers') }}
                     </div>
                 </div>
 
@@ -87,10 +87,10 @@
                 <div class="relative group">
                     <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition">
                         <i class="fas fa-tags w-5"></i>
-                        <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">Plans</span>
+                        <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">{{ __('dashboard.plans') }}</span>
                     </a>
                     <div x-show="!sidebarOpen" class="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap top-0">
-                        Plans
+                        {{ __('dashboard.plans') }}
                     </div>
                 </div>
 
@@ -98,10 +98,10 @@
                 <div class="relative group">
                     <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg text-blue-100 hover:bg-blue-700 transition">
                         <i class="fas fa-chart-bar w-5"></i>
-                        <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">Analytics</span>
+                        <span x-show="sidebarOpen" class="ml-3 transition-opacity duration-300">{{ __('dashboard.analytics') }}</span>
                     </a>
                     <div x-show="!sidebarOpen" class="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap top-0">
-                        Analytics
+                        {{ __('dashboard.analytics') }}
                     </div>
                 </div>
             </nav>
@@ -114,7 +114,7 @@
                     </div>
                     <div x-show="sidebarOpen" class="ml-3 flex-1 transition-opacity duration-300">
                         <p class="text-sm font-medium">{{ auth()->user()->name }}</p>
-                        <p class="text-xs text-blue-300">SuperAdmin</p>
+                        <p class="text-xs text-blue-300">{{ __('dashboard.superadmin') }}</p>
                     </div>
                     <form x-show="sidebarOpen" method="POST" action="{{ route('logout') }}" class="transition-opacity duration-300">
                         @csrf
@@ -132,17 +132,47 @@
             <header class="bg-white shadow-sm border-b border-gray-200">
                 <div class="px-8 py-4 flex items-center justify-between">
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-800">@yield('page-title', 'Dashboard')</h2>
-                        <p class="text-sm text-gray-600 mt-1">@yield('page-description', 'Welcome back!')</p>
+                        <h2 class="text-2xl font-bold text-gray-800">@yield('page-title', __('dashboard.dashboard'))</h2>
+                        <p class="text-sm text-gray-600 mt-1">@yield('page-description', __('dashboard.welcome_back'))</p>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <button class="relative p-2 text-gray-600 hover:text-gray-800">
+                        <!-- Language Switcher -->
+                        <div x-data="{ open: false }" class="relative">
+                            <button @click="open = !open" class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+                                <i class="fas fa-globe text-gray-600"></i>
+                                <span class="text-sm font-medium text-gray-700">{{ strtoupper(app()->getLocale()) }}</span>
+                                <i class="fas fa-chevron-down text-xs text-gray-500"></i>
+                            </button>
+                            <div x-show="open" @click.away="open = false" x-cloak class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                                <a href="{{ route('lang.switch', 'en') }}" class="flex items-center px-4 py-2 hover:bg-gray-100 transition {{ app()->getLocale() == 'en' ? 'bg-blue-50' : '' }}">
+                                    <span class="mr-2">🇬🇧</span>
+                                    <span class="text-sm">English</span>
+                                </a>
+                                <a href="{{ route('lang.switch', 'ms') }}" class="flex items-center px-4 py-2 hover:bg-gray-100 transition {{ app()->getLocale() == 'ms' ? 'bg-blue-50' : '' }}">
+                                    <span class="mr-2">🇲🇾</span>
+                                    <span class="text-sm">Bahasa Melayu</span>
+                                </a>
+                                <a href="{{ route('lang.switch', 'id') }}" class="flex items-center px-4 py-2 hover:bg-gray-100 transition {{ app()->getLocale() == 'id' ? 'bg-blue-50' : '' }}">
+                                    <span class="mr-2">🇮🇩</span>
+                                    <span class="text-sm">Bahasa Indonesia</span>
+                                </a>
+                                <a href="{{ route('lang.switch', 'zh') }}" class="flex items-center px-4 py-2 hover:bg-gray-100 transition {{ app()->getLocale() == 'zh' ? 'bg-blue-50' : '' }}">
+                                    <span class="mr-2">🇨🇳</span>
+                                    <span class="text-sm">中文</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Notifications -->
+                        <button class="relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition">
                             <i class="fas fa-bell text-xl"></i>
-                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                         </button>
-                        <div class="text-right">
-                            <p class="text-sm font-medium text-gray-800">{{ now()->format('l, F j, Y') }}</p>
-                            <p class="text-xs text-gray-600">{{ now()->format('g:i A') }}</p>
+
+                        <!-- Current Time -->
+                        <div class="text-sm text-gray-600">
+                            <i class="far fa-clock mr-2"></i>
+                            <span id="current-time"></span>
                         </div>
                     </div>
                 </div>
