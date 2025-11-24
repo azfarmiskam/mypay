@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard')
-@section('page-title', 'Dashboard')
-@section('page-description', 'System overview and key metrics')
+@section('title', __('dashboard.dashboard'))
+@section('page-title', __('dashboard.dashboard'))
+@section('page-description', __('dashboard.welcome_back'))
 
 @section('content')
 <!-- Metrics Cards -->
@@ -11,10 +11,10 @@
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="text-center sm:text-left">
-                <p class="text-sm font-medium text-gray-600">Total Sellers</p>
+                <p class="text-sm font-medium text-gray-600">{{ __('dashboard.total_sellers') }}</p>
                 <h3 class="text-3xl font-bold text-gray-900 mt-2">{{ $metrics['total_sellers'] }}</h3>
                 <p class="text-xs text-green-600 mt-2">
-                    <i class="fas fa-arrow-up"></i> Active accounts
+                    <i class="fas fa-arrow-up"></i> {{ __('dashboard.active_accounts') }}
                 </p>
             </div>
             <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -27,10 +27,10 @@
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="text-center sm:text-left">
-                <p class="text-sm font-medium text-gray-600">Active Subscriptions</p>
+                <p class="text-sm font-medium text-gray-600">{{ __('dashboard.active_subscriptions') }}</p>
                 <h3 class="text-3xl font-bold text-gray-900 mt-2">{{ $metrics['active_subscriptions'] }}</h3>
                 <p class="text-xs text-green-600 mt-2">
-                    <i class="fas fa-arrow-up"></i> Paying customers
+                    <i class="fas fa-arrow-up"></i> {{ __('dashboard.paying_customers') }}
                 </p>
             </div>
             <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -43,10 +43,10 @@
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="text-center sm:text-left">
-                <p class="text-sm font-medium text-gray-600">Monthly Revenue</p>
+                <p class="text-sm font-medium text-gray-600">{{ __('dashboard.monthly_revenue') }}</p>
                 <h3 class="text-3xl font-bold text-gray-900 mt-2">RM {{ number_format($metrics['monthly_revenue'], 2) }}</h3>
                 <p class="text-xs text-green-600 mt-2">
-                    <i class="fas fa-arrow-up"></i> This month
+                    <i class="fas fa-arrow-up"></i> {{ __('dashboard.this_month') }}
                 </p>
             </div>
             <div class="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -59,10 +59,10 @@
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="text-center sm:text-left">
-                <p class="text-sm font-medium text-gray-600">System Health</p>
-                <h3 class="text-3xl font-bold text-green-600 mt-2">{{ $metrics['system_health'] }}</h3>
+                <p class="text-sm font-medium text-gray-600">{{ __('dashboard.system_health') }}</p>
+                <h3 class="text-3xl font-bold text-green-600 mt-2">{{ __('dashboard.healthy') }}</h3>
                 <p class="text-xs text-gray-500 mt-2">
-                    <i class="fas fa-check-circle"></i> All systems operational
+                    <i class="fas fa-check-circle"></i> {{ __('dashboard.all_systems_operational') }}
                 </p>
             </div>
             <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -78,8 +78,8 @@
     <div class="lg:col-span-2">
         <div class="bg-white rounded-xl shadow-sm border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-gray-900">Recent Seller Registrations</h3>
-                <a href="#" class="text-sm text-blue-600 hover:text-blue-700 font-medium">View All</a>
+                <h3 class="text-lg font-semibold text-gray-900">{{ __('dashboard.recent_seller_registrations') }}</h3>
+                <a href="#" class="text-sm text-blue-600 hover:text-blue-700 font-medium">{{ __('dashboard.view_analytics') }}</a>
             </div>
             <div class="p-6">
                 @if($recentSellers->count() > 0)
@@ -87,10 +87,10 @@
                         <table class="w-full">
                             <thead>
                                 <tr class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    <th class="pb-3">Name</th>
-                                    <th class="pb-3">Email</th>
+                                    <th class="pb-3">{{ __('dashboard.name') }}</th>
+                                    <th class="pb-3">{{ __('dashboard.email') }}</th>
                                     <th class="pb-3">Status</th>
-                                    <th class="pb-3">Joined</th>
+                                    <th class="pb-3">{{ __('dashboard.registered') }}</th>
                                     <th class="pb-3">Actions</th>
                                 </tr>
                             </thead>
@@ -124,7 +124,7 @@
                 @else
                     <div class="text-center py-12">
                         <i class="fas fa-users text-4xl text-gray-300 mb-4"></i>
-                        <p class="text-gray-500">No sellers registered yet</p>
+                        <p class="text-gray-500">{{ __('dashboard.no_sellers_yet') }}</p>
                     </div>
                 @endif
             </div>
@@ -135,14 +135,14 @@
     <div class="lg:col-span-1">
         <div class="bg-white rounded-xl shadow-sm border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-900">Subscription Plans</h3>
+                <h3 class="text-lg font-semibold text-gray-900">{{ __('dashboard.subscription_plans') }}</h3>
             </div>
             <div class="p-6 space-y-4">
                 @foreach($plans as $plan)
                 <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
                     <div>
                         <p class="font-semibold text-gray-900">{{ $plan->name }}</p>
-                        <p class="text-sm text-gray-600">RM {{ number_format($plan->price, 2) }}/mo</p>
+                        <p class="text-sm text-gray-600">RM {{ number_format($plan->price, 2) }}{{ __('dashboard.per_month') }}</p>
                     </div>
                     <div class="text-right">
                         <p class="text-2xl font-bold text-blue-600">0</p>
@@ -155,23 +155,23 @@
 
         <!-- Quick Actions -->
         <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-sm p-6 mt-6 text-white">
-            <h3 class="text-lg font-semibold mb-4">Quick Actions</h3>
+            <h3 class="text-lg font-semibold mb-4">{{ __('dashboard.quick_actions') }}</h3>
             <div class="space-y-3">
                 <a href="#" class="flex items-center p-3 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
                     <i class="fas fa-user-plus w-5"></i>
-                    <span class="ml-3 text-sm font-medium">Add New Admin</span>
+                    <span class="ml-3 text-sm font-medium">{{ __('dashboard.add_new_admin') }}</span>
                 </a>
                 <a href="#" class="flex items-center p-3 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
                     <i class="fas fa-store-alt w-5"></i>
-                    <span class="ml-3 text-sm font-medium">Create Seller</span>
+                    <span class="ml-3 text-sm font-medium">{{ __('dashboard.create_seller') }}</span>
                 </a>
                 <a href="#" class="flex items-center p-3 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
                     <i class="fas fa-tags w-5"></i>
-                    <span class="ml-3 text-sm font-medium">Manage Plans</span>
+                    <span class="ml-3 text-sm font-medium">{{ __('dashboard.manage_plans') }}</span>
                 </a>
                 <a href="#" class="flex items-center p-3 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
                     <i class="fas fa-cog w-5"></i>
-                    <span class="ml-3 text-sm font-medium">System Settings</span>
+                    <span class="ml-3 text-sm font-medium">{{ __('dashboard.system_settings') }}</span>
                 </a>
             </div>
         </div>
