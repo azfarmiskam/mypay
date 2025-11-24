@@ -178,7 +178,7 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200">
                                 @php
-                                    $superAdmins = \App\Models\User::where('role', 'superadmin')->orWhere('role', 'admin')->latest()->get();
+                                    $superAdmins = \App\Models\User::where('role', 'superadmin')->latest()->get();
                                 @endphp
                                 @forelse($superAdmins as $admin)
                                 <tr class="hover:bg-gray-50">
