@@ -14,9 +14,17 @@ Route::middleware(['web', 'auth', 'superadmin'])->prefix('superadmin')->name('su
     // Profile
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     
-    // Admin Management
-    Route::resource('admins', AdminController::class)->except(['show', 'create', 'edit']);
-    Route::patch('/admins/{admin}/reset-password', [AdminController::class, 'resetPassword'])->name('admins.resetPassword');
+    // Admin Management routes
+    Route::get('/admins', [AdminController::class, 'index'])->name('admins.index');
+    Route::post('/admins', [AdminController::class, 'store'])->name('admins.store');
+    Route::put('/admins/{admin}', [AdminController::class, 'update'])->name('admins.update');
+    Route::delete('/admins/{admin}', [AdminController::class, 'destroy'])->name('admins.destroy');
+    Route::post('/admins/{admin}/reset-password', [AdminController::class, 'resetPassword'])->name('admins.resetPassword');
+    
+    // Super Admin Management routes
+    Route::post('/superadmins', [AdminController::class, 'storeSuperAdmin'])->name('superadmins.store');
+    Route::put('/superadmins/{admin}', [AdminController::class, 'updateSuperAdmin'])->name('superadmins.update');
+    Route::delete('/superadmins/{admin}', [AdminController::class, 'destroySuperAdmin'])->name('superadmins.destroy');
     
     // System Settings
     // Route::get('/settings', [SystemSettingsController::class, 'index'])->name('settings.index');

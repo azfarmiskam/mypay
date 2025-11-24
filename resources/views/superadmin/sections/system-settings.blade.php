@@ -213,14 +213,15 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                        <button @click="editAdmin = {{ $admin->toJson() }}; showEditModal = true" 
-                                                class="text-blue-600 hover:text-blue-800 mr-3">
-                                            <i class="fas fa-edit"></i> Edit
-                                        </button>
-                                        <button @click="deleteAdmin = {{ $admin->toJson() }}; showDeleteModal = true" 
-                                                class="text-red-600 hover:text-red-800">
-                                            <i class="fas fa-trash"></i> Delete
-                                        </button>
+                                        <form action="{{ route('superadmin.superadmins.destroy', $admin) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" 
+                                                    onclick="return confirm('Are you sure you want to delete this super admin?')"
+                                                    class="text-red-600 hover:text-red-800">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @empty
@@ -254,13 +255,58 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
+                                @php
+                                    $activityLogs = \App\Models\ActivityLog::with('user')
+                                        ->latest()
+                                        ->limit(50)
+                                        ->get();
+                                @endphp
+                                @forelse($activityLogs as $log)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                                        {{ $log->created_at->format('M d, Y H:i:s') }}
+                                        <span class="text-xs text-gray-400 block">{{ $log->created_at->diffForHumans() }}</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                                                <span class="text-blue-600 font-semibold text-xs">{{ substr($log->user->name ?? 'U', 0, 1) }}</span>
+                                            </div>
+                                            <span class="text-sm font-medium text-gray-900">{{ $log->user->name ?? 'Unknown' }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full 
+                                            @if($log->action === 'created') bg-green-100 text-green-800
+                                            @elseif($log->action === 'updated') bg-blue-100 text-blue-800
+                                            @elseif($log->action === 'deleted') bg-red-100 text-red-800
+                                            @elseif($log->action === 'password_reset') bg-yellow-100 text-yellow-800
+                                            @else bg-gray-100 text-gray-800
+                                            @endif">
+                                            {{ ucfirst(str_replace('_', ' ', $log->action)) }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">
+                                        {{ $log->description }}
+                                        @if($log->changes)
+                                            <button @click="showChanges = !showChanges" class="text-blue-600 hover:text-blue-800 text-xs ml-2">
+                                                <i class="fas fa-info-circle"></i> View Changes
+                                            </button>
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                                        {{ $log->ip_address ?? 'N/A' }}
+                                    </td>
+                                </tr>
+                                @empty
                                 <tr>
                                     <td colspan="5" class="px-6 py-12 text-center text-gray-500">
                                         <i class="fas fa-history text-4xl mb-4 block text-gray-300"></i>
-                                        <p class="text-lg font-medium">Activity Logs</p>
-                                        <p class="text-sm mt-2">Activity logging will be implemented soon</p>
+                                        <p class="text-lg font-medium">No Activity Logs</p>
+                                        <p class="text-sm mt-2">Activity logs will appear here when actions are performed</p>
                                     </td>
                                 </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -268,12 +314,14 @@
             </div>
 
             <!-- Add Super Admin Modal -->
-            @include('superadmin.admins.partials.add-modal')
+            @include('superadmin.sections.partials.add-superadmin-modal')
 
-            <!-- Edit Super Admin Modal -->
-            @include('superadmin.admins.partials.edit-modal')
+            <!-- Edit Super Admin Modal (reuse admin edit modal but with different route) -->
+            <div x-show="showEditModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto" style="display: none;">
+                <!-- Will implement edit modal separately -->
+            </div>
 
-            <!-- Delete Confirmation Modal -->
+            <!-- Delete Confirmation Modal (reuse admin delete modal) -->
             @include('superadmin.admins.partials.delete-modal')
         </div>
 
