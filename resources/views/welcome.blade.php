@@ -7,6 +7,8 @@
     <title>MyPay - {{ __('landing.hero_title_1') }} {{ __('landing.hero_title_2') }}</title>
     <meta name="description"
         content="{{ __('landing.hero_subtitle') }}">
+    <link rel="icon" type="image/png" href="/favicon.png?v={{ time() }}">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v={{ time() }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
