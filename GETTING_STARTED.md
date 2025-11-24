@@ -159,21 +159,6 @@ mypay/
 ### 1. Create Superadmin User
 ```bash
 php artisan tinker
-```
-```php
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-
-User::create([
-    'name' => 'Super Admin',
-    'email' => 'azfarmiskam@gmail.com',
-    'password' => Hash::make('@Zfar015827'),
-    'role' => 'superadmin',
-    'status' => 'active',
-    'email_verified_at' => now()
-]);
-```
-
 ### 2. Create Default Plans
 After creating the Plan seeder, run:
 ```bash
