@@ -88,12 +88,15 @@
          x-init="if(showNotification) setTimeout(() => showNotification = false, 5000)"
          class="fixed top-4 right-4 z-50 max-w-md"
          style="display: none;">
-        <div class="px-6 py-4 rounded-lg shadow-lg flex items-center space-x-3"
-             :style="notificationType === 'success' ? 'background-color: #10b981 !important; color: white !important;' : 'background-color: #ef4444 !important; color: white !important;'">
-            <i :class="notificationType === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle'" 
-               class="text-2xl text-white"></i>
-            <span x-text="notificationMessage" class="font-medium text-white"></span>
-            <button @click="showNotification = false" class="ml-4 text-white hover:text-gray-200">
+        <div class="bg-white px-6 py-4 rounded-lg shadow-lg border-2 flex items-center space-x-3"
+             :class="notificationType === 'success' ? 'border-green-500' : 'border-red-500'">
+            <div class="flex-shrink-0">
+                <i class="text-2xl"
+                   :class="notificationType === 'success' ? 'fas fa-check-circle' : 'fas fa-times-circle'"
+                   :style="notificationType === 'success' ? 'color: #10b981;' : 'color: #ef4444;'"></i>
+            </div>
+            <span x-text="notificationMessage" class="font-medium text-gray-900"></span>
+            <button @click="showNotification = false" class="ml-4 text-gray-400 hover:text-gray-600">
                 <i class="fas fa-times"></i>
             </button>
         </div>
