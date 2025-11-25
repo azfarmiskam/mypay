@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Plan;
+use App\Models\SystemSetting;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -31,13 +32,17 @@ class DashboardController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        // Get system settings
+        $settings = SystemSetting::firstOrCreate([]);
+
         return view('superadmin.dashboard', compact(
             'totalSellers',
             'activeSubscriptions',
             'monthlyRevenue',
             'recentSellers',
             'plans',
-            'admins'
+            'admins',
+            'settings'
         ));
     }
 }

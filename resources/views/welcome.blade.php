@@ -28,7 +28,7 @@
                             600: '#4f5de7',
                             700: '#4148cc',
                             800: '#373ea5',
-                            900: '#1E3A8A',
+                            900: '{{ $themeColors["main"] ?? "#1E3A8A" }}',
                             950: '#1e2555',
                         },
                         secondary: {
@@ -36,8 +36,8 @@
                             100: '#dbeafe',
                             200: '#bfdbfe',
                             300: '#93c5fd',
-                            400: '#60A5FA',
-                            500: '#3b82f6',
+                            400: '{{ $themeColors["third"] ?? "#60A5FA" }}',
+                            500: '{{ $themeColors["secondary"] ?? "#3b82f6" }}',
                             600: '#2563eb',
                             700: '#1d4ed8',
                             800: '#1e40af',
@@ -50,20 +50,26 @@
         }
     </script>
     <style>
+        :root {
+            --color-main: {{ $themeColors['main'] ?? '#1E3A8A' }};
+            --color-secondary: {{ $themeColors['secondary'] ?? '#3b82f6' }};
+            --color-third: {{ $themeColors['third'] ?? '#60A5FA' }};
+        }
+        
         body {
             font-family: 'Inter', system-ui, sans-serif;
         }
 
         .bg-gradient-primary {
-            background: linear-gradient(135deg, #1E3A8A 0%, #60A5FA 100%);
+            background: linear-gradient(135deg, var(--color-main) 0%, var(--color-third) 100%);
         }
 
         .bg-gradient-secondary {
-            background: linear-gradient(135deg, #60A5FA 0%, #93c5fd 100%);
+            background: linear-gradient(135deg, var(--color-third) 0%, var(--color-secondary) 100%);
         }
 
         .text-gradient {
-            background: linear-gradient(135deg, #1E3A8A 0%, #60A5FA 100%);
+            background: linear-gradient(135deg, var(--color-main) 0%, var(--color-third) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;

@@ -21,6 +21,47 @@
     <!-- Compiled Assets (Vite) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <!-- Dynamic Theme Colors -->
+    <style>
+        :root {
+            --color-main: {{ $themeColors['main'] }};
+            --color-secondary: {{ $themeColors['secondary'] }};
+            --color-third: {{ $themeColors['third'] }};
+            --color-title: {{ $themeColors['title'] }};
+            --color-subtitle: {{ $themeColors['subtitle'] }};
+            --color-content: {{ $themeColors['content'] }};
+        }
+        
+        /* Theme color utility classes */
+        .bg-theme-main { background-color: var(--color-main) !important; }
+        .bg-theme-secondary { background-color: var(--color-secondary) !important; }
+        .bg-theme-third { background-color: var(--color-third) !important; }
+        .text-theme-main { color: var(--color-main) !important; }
+        .text-theme-secondary { color: var(--color-secondary) !important; }
+        .text-theme-third { color: var(--color-third) !important; }
+        .text-theme-title { color: var(--color-title) !important; }
+        .text-theme-subtitle { color: var(--color-subtitle) !important; }
+        .text-theme-content { color: var(--color-content) !important; }
+        .border-theme-main { border-color: var(--color-main) !important; }
+        .border-theme-secondary { border-color: var(--color-secondary) !important; }
+        
+        /* Override ONLY background colors for blue classes */
+        .bg-blue-900 { background-color: var(--color-main) !important; }
+        .bg-blue-800 { background-color: var(--color-secondary) !important; }
+        .bg-blue-950 { background-color: var(--color-main) !important; }
+        .bg-blue-600 { background-color: var(--color-secondary) !important; }
+        .bg-blue-700 { background-color: var(--color-main) !important; }
+        .hover\:bg-blue-700:hover { background-color: var(--color-main) !important; }
+        .hover\:bg-blue-800:hover { background-color: var(--color-secondary) !important; }
+        .border-blue-700 { border-color: var(--color-main) !important; }
+        .ring-blue-500 { --tw-ring-color: var(--color-secondary) !important; }
+        .focus\:ring-blue-500:focus { --tw-ring-color: var(--color-secondary) !important; }
+        
+        /* Override gradient colors */
+        .from-blue-900 { --tw-gradient-from: var(--color-main) !important; --tw-gradient-to: rgb(30 58 138 / 0) !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
+        .to-blue-800 { --tw-gradient-to: var(--color-secondary) !important; }
+    </style>
+
     @stack('styles')
 </head>
 <body class="font-sans antialiased bg-gray-50" x-data="{
@@ -30,11 +71,36 @@
     showEditModal: false,
     showDeleteModal: false,
     editAdmin: {},
-    deleteAdmin: {}
+    deleteAdmin: {},
+    showNotification: {{ session('success') || session('error') ? 'true' : 'false' }},
+    notificationType: '{{ session('success') ? 'success' : 'error' }}',
+    notificationMessage: '{{ session('success') ?? session('error') ?? '' }}'
 }">
+
+    <!-- Notification Toast -->
+    <div x-show="showNotification" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform translate-y-2"
+         x-transition:enter-end="opacity-100 transform translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         x-init="if(showNotification) setTimeout(() => showNotification = false, 5000)"
+         class="fixed top-4 right-4 z-50 max-w-md"
+         style="display: none;">
+        <div class="px-6 py-4 rounded-lg shadow-lg flex items-center space-x-3"
+             :style="notificationType === 'success' ? 'background-color: #10b981 !important; color: white !important;' : 'background-color: #ef4444 !important; color: white !important;'">
+            <i :class="notificationType === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle'" 
+               class="text-2xl text-white"></i>
+            <span x-text="notificationMessage" class="font-medium text-white"></span>
+            <button @click="showNotification = false" class="ml-4 text-white hover:text-gray-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
     <div class="min-h-screen">
         <!-- Sidebar -->
-        <aside :class="sidebarOpen ? 'w-64' : 'w-20'" class="fixed inset-y-0 left-0 bg-gradient-to-b from-blue-900 to-blue-800 text-white shadow-xl z-50 transition-all duration-300">
+        <aside :class="sidebarOpen ? 'w-64' : 'w-20'" class="fixed inset-y-0 left-0 bg-blue-800 text-white shadow-xl z-50 transition-all duration-300">
             <!-- Logo -->
             <div class="flex items-center justify-center h-16 bg-blue-950 border-b border-blue-700 px-4">
                 <h1 class="text-2xl font-bold">

@@ -135,39 +135,6 @@
                             </div>
                         </div>
 
-                        <!-- Content Color Theme -->
-                        <div>
-                            <h5 class="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">Content Color Theme</h5>
-                            <div class="grid grid-cols-3 gap-4">
-                                <!-- Title Color -->
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Title Color</label>
-                                    <input type="color" 
-                                           name="title_color"
-                                           value="{{ $settings->title_color ?? '#1F2937' }}"
-                                           class="w-full h-12 rounded-lg border-2 border-gray-300 cursor-pointer hover:border-blue-500 transition">
-                                </div>
-
-                                <!-- Sub-Title Color -->
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Sub-Title Color</label>
-                                    <input type="color" 
-                                           name="subtitle_color"
-                                           value="{{ $settings->subtitle_color ?? '#4B5563' }}"
-                                           class="w-full h-12 rounded-lg border-2 border-gray-300 cursor-pointer hover:border-blue-500 transition">
-                                </div>
-
-                                <!-- Content Color -->
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Content Color</label>
-                                    <input type="color" 
-                                           name="content_color"
-                                           value="{{ $settings->content_color ?? '#6B7280' }}"
-                                           class="w-full h-12 rounded-lg border-2 border-gray-300 cursor-pointer hover:border-blue-500 transition">
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="flex justify-end mt-6">
                             <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
                                 <i class="fas fa-save mr-2"></i>Save Changes

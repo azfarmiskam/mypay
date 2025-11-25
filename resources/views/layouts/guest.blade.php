@@ -32,7 +32,7 @@
                                 600: '#4f5de7',
                                 700: '#4148cc',
                                 800: '#373ea5',
-                                900: '#1E3A8A',
+                                900: '{{ $themeColors["main"] }}',
                                 950: '#1e2555',
                             },
                             secondary: {
@@ -40,8 +40,8 @@
                                 100: '#dbeafe',
                                 200: '#bfdbfe',
                                 300: '#93c5fd',
-                                400: '#60A5FA',
-                                500: '#3b82f6',
+                                400: '{{ $themeColors["third"] }}',
+                                500: '{{ $themeColors["secondary"] }}',
                                 600: '#2563eb',
                                 700: '#1d4ed8',
                                 800: '#1e40af',
@@ -56,6 +56,18 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        
+        <!-- Dynamic Theme Colors -->
+        <style>
+            :root {
+                --color-main: {{ $themeColors['main'] }};
+                --color-secondary: {{ $themeColors['secondary'] }};
+                --color-third: {{ $themeColors['third'] }};
+                --color-title: {{ $themeColors['title'] }};
+                --color-subtitle: {{ $themeColors['subtitle'] }};
+                --color-content: {{ $themeColors['content'] }};
+            }
+        </style>
         
         <!-- Alpine.js -->
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
